@@ -24,7 +24,7 @@ var HOSTNAME = "localhost";
 /********************************************************************************/
 
 
-exports.PORT = PORT;
+exports.PORT = 8080;
 exports.DB_CONNECT = DB_CONNECT;
 exports.COOKIE_SECRET = COOKIE_SECRET;
 exports.HOSTNAME = HOSTNAME;

@@ -27,7 +27,7 @@ var db = require("./database.js");
 function isAdminUserMiddleware(req,res,next)
 {
    if (req.session.userId) {
-      var q = "SELECT * FROM User WHERE userId = " + req.session.userId;
+      var q = "SELECT * FROM User WHERE userId = " + req.session.userId; /* > Change to prepared */
       db.query(q,function (e1,d1) { isAdminUserMiddleware1(req,res,next,e1,d1) } );
     }
    else {

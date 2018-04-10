@@ -29,7 +29,7 @@ function displayAllocations(req,res,next)
    
    var threshold = req.query.threshold;
  
-   var q = "SELECT * FROM Allocations WHERE userId = " + userId;
+   var q = "SELECT * FROM Allocations WHERE userId = " + userId; /* > Change to prepared */
    if (threshold) {
        var thint = threshold*1;
        if (thint >= 0 && thint <= 99) {
