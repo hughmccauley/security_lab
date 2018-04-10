@@ -34,7 +34,7 @@ function displayContributions0(req,res,next,sts)
 {
    var userid = req.session.userId;
 
-   var q = "SELECT * FROM Contributions WHERE userId = " + userid;
+   var q = "SELECT * FROM Contributions WHERE userId = " + userid; /* > Change to prepared */
    db.query(q,function (e1,d1) { displayContributions1(req,res,next,sts,e1,d1); } );
 }
 
@@ -84,7 +84,7 @@ function handleContributionsUpdate(req,res,next)
     }
 
    var q = "UPDATE Contributions SET preTax = " + preTax + ", afterTax = " + afterTax +
-      ", roth = " + roth + " WHERE userId = " + userId;
+      ", roth = " + roth + " WHERE userId = " + userId; /* > Change to prepared */
    db.query(q,function (e1,d1) { handleContributionsUpdate1(req,res,next,e1,d1); } );
 }
 
