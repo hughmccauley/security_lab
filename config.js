@@ -13,7 +13,8 @@ var PORT_NUMBER = 7032;
 
 
 var PORT = PORT_NUMBER;
-var DB_CONNECT = 'mysql://group33:group33_password@http://cs1320SL.CS.Brown.edu:7032/group33_db';
+//var DB_CONNECT = 'mysql://group33:group33_password@http://cs1320SL.CS.Brown.edu:7032/group33_db';
+var DB_CONNECT = 'mysql://group33:group33_password@http://localhost/group33_db';
 var COOKIE_SECRET = "SessionCookieSecretKey";
 var HOSTNAME = "localhost";
 
@@ -27,7 +28,7 @@ var HOSTNAME = "localhost";
 /********************************************************************************/
 
 
-exports.PORT = 8080;
+exports.PORT = PORT;
 exports.DB_CONNECT = DB_CONNECT;
 exports.COOKIE_SECRET = COOKIE_SECRET;
 exports.HOSTNAME = HOSTNAME;

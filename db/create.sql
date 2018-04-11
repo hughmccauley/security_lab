@@ -1,7 +1,6 @@
 /$# /bin/csh -f
 
-set mysqlargs = "-h http://cs1320SL.CS.Brown.edu:7032 -u group33 -pgroup33_password"
-
+set mysqlargs = "-h localhost -u group33 -pgroup33_password"
 set db = "group33_db";
 
 
