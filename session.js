@@ -27,8 +27,8 @@ var db = require("./database.js");
 function isAdminUserMiddleware(req,res,next)
 {
    if (req.session.userId) {
-      var q = "SELECT * FROM User WHERE userId = " + req.session.userId; /* > Change to prepared */
-      db.query(q,function (e1,d1) { isAdminUserMiddleware1(req,res,next,e1,d1) } );
+      var q = "SELECT * FROM User WHERE userId = ?"; /* > Change to prepared */
+      db.query(q,[req.session.userId],function (e1,d1) { isAdminUserMiddleware1(req,res,next,e1,d1) } );
     }
    else {
       console.log("redirecting to login");
@@ -92,8 +92,8 @@ function handleLoginRequest(req,res,next)
    var username = req.body.userName;
    var password = req.body.password;
 
-   var q = "SELECT * FROM User U WHERE U.userName = '" + username + "'";
-   db.query(q,function (e1,d1) { handleLoginRequest1(req,res,next,e1,d1); } );
+   var q = "SELECT * FROM User U WHERE U.userName = '?'";
+   db.query(q,[username],function (e1,d1) { handleLoginRequest1(req,res,next,e1,d1); } );
 }
 
 
@@ -199,8 +199,8 @@ function handleSignup(req,res,next)
     };
 
    if (validateSignup(userName, firstName, lastName, password, verify, email, errors)) {
-      var q = "SELECT * FROM User U WHERE U.userName = '" + userName + "'";
-      db.query(q,function (e1,d1) { handleSignup1(req,res,next,errors,e1,d1); });
+      var q = "SELECT * FROM User U WHERE U.userName = '?'";
+      db.query(q,[userName], function (e1,d1) { handleSignup1(req,res,next,errors,e1,d1); });
     }
     else {
        console.log("user did not validate");
@@ -238,8 +238,8 @@ function handleSignup2(req,res,next,err,data)
    
    var userName = req.body.userName;
    
-   var q = "SELECT * FROM User U WHERE U.userName = '" + userName + "'";
-   db.query(q,function (e1,d1) { handleSignup3(req,res,next,e1,d1); } );
+   var q = "SELECT * FROM User U WHERE U.userName = '?'";
+   db.query(q,[userName], function (e1,d1) { handleSignup3(req,res,next,e1,d1); } );
 }
 
 
@@ -323,9 +323,8 @@ function prepareUserData(user,next)
    var funds = Math.floor((Math.random() * 40) + 1);
    var bonds = 100 - (stocks + funds);
 
-   var q = "INSERT INTO Allocations (userId,stocks,funds,bonds) VALUES ( " +
-      user.userId + "," + stocks + "," + funds + "," + bonds + ")";
-   db.query(q,function (e1,d1) { prepareUserData1(user,next,e1,d1); } );
+   var q = "INSERT INTO Allocations (userId,stocks,funds,bonds) VALUES ( ?,?,?,?)";
+   db.query(q, [user.userId, stocks, funds, bonds], function (e1,d1) { prepareUserData1(user,next,e1,d1); } );
 }
 
 
@@ -333,8 +332,8 @@ function prepareUserData1(user,next,err,data)
 {
    if (err != null) return next(err);
 
-   var q = "INSERT INTO Profile (userid) VALUES ( " + user.userId + ")";
-   db.query(q,function(e1,d1) { prepareUserData2(user,next,e1,d1); } );
+   var q = "INSERT INTO Profile (userid) VALUES ( ?)";
+   db.query(q, [user.userId], function(e1,d1) { prepareUserData2(user,next,e1,d1); } );
 }
 
 
@@ -342,8 +341,8 @@ function prepareUserData2(user,next,err,data)
 {
    if (err != null) return next(err);
 
-   var q = "INSERT INTO Contributions (userid) VALUES ( " + user.userId + ")";
-   db.query(q,function(e1,d1) { prepareUserData3(user,next,e1,d1); } );
+   var q = "INSERT INTO Contributions (userid) VALUES ( ?)";
+   db.query(q, [user.userId], function(e1,d1) { prepareUserData3(user,next,e1,d1); } );
 }
 
 
@@ -372,8 +371,8 @@ function displayWelcomePage(req,res,next)
 
    userId = req.session.userId;
 
-   var q = "SELECT * FROM User WHERE userId = " + userId;
-   db.query(q,function (e1,d1) { displayWelcomePage1(req,res,next,e1,d1); } );
+   var q = "SELECT * FROM User WHERE userId = ?";
+   db.query(q, [userId], function (e1,d1) { displayWelcomePage1(req,res,next,e1,d1); } );
 }
 
 
