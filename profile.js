@@ -32,9 +32,9 @@ function displayProfile0(req,res,next,succ)
 
    var q = "SELECT U.firstName, U.lastName, P.ssn, P.dob, P.address, P.bankAcc, P.bankRouting";
    q += " FROM User U, Profile P";
-   q += " WHERE U.userId = P.userId AND U.userId = " + userid; /* > Change to prepared */
+   q += " WHERE U.userId = P.userId AND U.userId = ?"; /* > Change to prepared */
 
-   db.query(q,function (e1,d1) { displayProfile1(req,res,next,succ,e1,d1); } );
+   db.query(q, [userid], function (e1,d1) { displayProfile1(req,res,next,succ,e1,d1); } );
 }
 
 
