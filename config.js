@@ -13,8 +13,8 @@ var PORT_NUMBER = 7033;
 
 
 var PORT = PORT_NUMBER;
-var DB_CONNECT = 'mysql://group33:group33_password@http://cs1320sl.cs.brown.edu:7033/group33_db';
-//var DB_CONNECT = 'mysql://group33:group33_password@http://localhost/group33_db';
+//var DB_CONNECT = 'mysql://group33:group33_password@http://cs1320sl.cs.brown.edu:7033/group33_db';
+var DB_CONNECT = 'mysql://group33:group33_password@http://localhost/group33_db';
 var COOKIE_SECRET = "SessionCookieSecretKey";
 var HOSTNAME = "localhost";
 
