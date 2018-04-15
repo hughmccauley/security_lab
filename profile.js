@@ -32,9 +32,9 @@ function displayProfile0(req,res,next,succ)
 
    var q = "SELECT U.firstName, U.lastName, P.ssn, P.dob, P.address, P.bankAcc, P.bankRouting";
    q += " FROM User U, Profile P";
-   q += " WHERE U.userId = P.userId AND U.userId = ?"; /* > Change to prepared */
+   q += " WHERE U.userId = P.userId AND U.userId = " + userid;
 
-   db.query(q, [userid], function (e1,d1) { displayProfile1(req,res,next,succ,e1,d1); } );
+   db.query(q,function (e1,d1) { displayProfile1(req,res,next,succ,e1,d1); } );
 }
 
 
@@ -81,9 +81,9 @@ function handleProfileUpdate(req,res,next)
 
    var userId = req.session.userId;
 
-   var q = "UPDATE User SET firstName = '?', lastName = '?'" +
-      " WHERE userId = ?"; /* > Change to prepared */
-   db.query(q,[firstname, lastname, userId],function (e1,d1) { handleProfileUpdate1(req,res,next,e1,d1); } );
+   var q = "UPDATE User SET firstName = '" + firstname + "', lastName = '" + lastname + "'" +
+      " WHERE userId = " + userId;
+   db.query(q,function (e1,d1) { handleProfileUpdate1(req,res,next,e1,d1); } );
 }
 
 
@@ -98,11 +98,11 @@ function handleProfileUpdate1(req,res,next,err,data)
    var bankAcc = req.body.bankAcc;
    var bankRouting = req.body.bankRouting;
 
-   var q = "UPDATE Profile SET ssn = '?', dob = '?', address = '" +
-      "?', bankAcc = '?', bankRouting = '?'" +
-      " WHERE userId = ?"; /* > Change to prepared */
+   var q = "UPDATE Profile SET ssn = '" + ssn + "', dob = '" + dob + "', address = '" +
+      address + "', bankAcc = '" + bankAcc + "', bankRouting = '" + bankRouting + "'" +
+      " WHERE userId = " + req.session.userId;
 
-   db.query(q, [ssn, dob, address, bankAcc, bankRouting, req.session.userId], function(e1,d1) { handleProfileUpdate2(req,res,next,e1,d1); } );
+   db.query(q,function(e1,d1) { handleProfileUpdate2(req,res,next,e1,d1); } );
 }
 
 
