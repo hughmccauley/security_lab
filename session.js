@@ -224,10 +224,13 @@ function handleSignup1(req,res,next,errors,err,data)
       return res.render("signup", errors);
     }
 
-   var q = "INSERT INTO User ( userName, firstName, lastName, password, email) " +
-      "VALUES ( '" + userName + "','" + firstName + "','" + lastName + "','" +
-      password + "','" + email + "')";
-   db.query(q,function(e1,d1) { handleSignup2(req,res,next,e1,d1); } );
+  //OLD
+  //  var q = "INSERT INTO User ( userName, firstName, lastName, password, email) " +
+  //     "VALUES ( '" + userName + "','" + firstName + "','" + lastName + "','" +
+  //     password + "','" + email + "')";
+      var q = "INSERT INTO User ( userName, firstName, lastName, password, email) " +
+      "VALUES (?, ?, ?, ?, ?)";
+   db.query(q, [userName, firstName, lastName, password, email], function(e1,d1) { handleSignup2(req,res,next,e1,d1); } );
 }
 
 
