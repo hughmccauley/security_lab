@@ -1,6 +1,5 @@
 ### Contributors
 * hmccaule
-* person 2
 * jh138
 
 ### Exploits/Attacks Used
@@ -11,3 +10,5 @@
 ### Defenses Used / How the Server Was Strengthened
 * The server was first defending against basic SQL injection attacks by using prepared statements instead of concatenating unchecked user inputs
 * Whenever the server takes plain text from users in client side it runs the risk of executing malicious javascript code. To prevent this, all user inputs were stripped of javascript tags
+* The server also changed benefits.js to check for a null dat input, which crashed the server in the past
+* 
