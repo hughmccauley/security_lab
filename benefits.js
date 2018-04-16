@@ -29,7 +29,7 @@ function displayBenefits(req,res,next)
 {
     displayBenefits0(req,res,next,false);
 }
-   
+
 
 
 function displayBenefits0(req,res,next,succ)
@@ -45,6 +45,10 @@ function displayBenefits1(req,res,next,succ,err,data)
 {
    if (err) return next(err);
 
+   if (data == null) {
+     return res.status(404).send('You shouldn\'t be here!');
+   }
+
    for (var i = 0; i < data.rows.length; ++i) {
        var date = data.rows[i].benefitStartDate;
        var mon = date.getMonth() + 1;
@@ -53,7 +57,7 @@ function displayBenefits1(req,res,next,succ,err,data)
        console.log("CONVERT",date,string);
        data.rows[i].benefitStartDate = string;
     }
-   
+
    var doc = { users : data.rows, user : { isAdmin : true } };
 
    if (succ) doc.updateSuccess = true;
